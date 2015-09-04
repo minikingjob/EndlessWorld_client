@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!-- saved from url=(0014)about:internet --><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="../../style.css" type="text/css" media="screen"><link rel="stylesheet" href="../../print.css" type="text/css" media="print"><link rel="stylesheet" href="../../override.css" type="text/css"><meta name="keywords" content="ScreenDensityScaleFactorManager,feathers.utils.ScreenDensityScaleFactorManager"><title>feathers.utils.ScreenDensityScaleFactorManager</title></head><body><script language="javascript" type="text/javascript" src="../../asdoc.js"></script><script language="javascript" type="text/javascript" src="../../help.js"></script><script language="javascript" type="text/javascript" src="../../cookies.js"></script><script language="javascript" type="text/javascript"><!--
+				asdocTitle = 'ScreenDensityScaleFactorManager - Feathers User Interface Controls for Starling Framework API Reference';
+				var baseRef = '../../';
+				window.onload = configPage;
+			--></script>
+<script type="text/javascript">
+			scrollToNameAnchor();
+		</script><table class="titleTable" cellpadding="0" cellspacing="0" id="titleTable" style="display:none"><tr><td class="titleTableTitle" align="left">Feathers 2.2.0 API Reference</td><td class="titleTableTopNav" align="right"><a href="../../package-summary.html" onclick="loadClassListFrame('../../all-classes.html')">All Packages</a>&nbsp;|&nbsp;<a href="../../class-summary.html" onclick="loadClassListFrame('../../all-classes.html')">All Classes</a>&nbsp;|&nbsp;<a href="../../all-index-A.html" onclick="loadClassListFrame('../../index-list.html')">Index</a>&nbsp;|&nbsp;<a id="framesLink1" href="../../index.html?feathers/utils/ScreenDensityScaleFactorManager.html&amp;feathers/utils/class-list.html">Frames</a><a id="noFramesLink1" style="display:none" href="" onclick="parent.location=document.location"> No Frames </a></td><td class="titleTableLogo" align="right" rowspan="3"><picture><img src="../../images/logo.jpg" srcset="../../images/logo@2x.jpg 2x" class="logoImage" alt=" Feathers Logo " title=" Feathers Logo "></picture></td></tr><tr class="titleTableRow2"><td class="titleTableSubTitle" id="subTitle" align="left">ScreenDensityScaleFactorManager</td><td class="titleTableSubNav" id="subNav" align="right"><a href="#methodSummary">Methods</a></td></tr><tr class="titleTableRow3"><td colspan="3">&nbsp;</td></tr></table><script language="javascript" type="text/javascript" xml:space="preserve">
+				<!--
+				
+					if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("ScreenDensityScaleFactorManager"); titleBar_setSubNav(false,false,false,false,false,false,false,false,true,false,false	,false,false,false,false,false);}	
+				-->
+			</script><div xmlns:fn="http://www.w3.org/2005/xpath-functions" class="MainContent"><table class="classHeaderTable" cellpadding="0" cellspacing="0"><tr><td class="classHeaderTableLabel">Package</td><td><a href="package-detail.html" onclick="javascript:loadClassListFrame('class-list.html')">feathers.utils</a></td></tr><tr><td class="classHeaderTableLabel">Class</td><td class="classSignature">public  class  ScreenDensityScaleFactorManager</td></tr><tr><td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">ScreenDensityScaleFactorManager  <img src="../../images/inherit-arrow.gif" title="Inheritance" alt="Inheritance" class="inheritArrow"> Object</td></tr></table><p></p><p></p><p></p>
+	 Automatically manages the Starling view port and stage dimensions to
+	 create an appropriate <code>contentScaleFactor</code> value for the
+	 current mobile device using the screen density (sometimes referred to as
+	 DPI or PPI). The stage and view port will be resized without
+	 letterboxing. Additionally, the view port and stage will be automatically
+	 updated if the native stage resizes or changes orientation.
+	 
+	 <p>The <code>contentScaleFactor</code> values calculated by this class
+	 are based on a combination of the screen density buckets supported by
+	 Google Android and the native scale factors used for Apple's iPhone:</p>
+	 
+	              <table ><tr><th>Name</th><th>Density</th><th>Scale Factor</th></tr><tr><td>ldpi</td><td>120</td><td>0.75</td></tr><tr><td>mdpi</td><td>160</td><td>1</td></tr><tr><td>hdpi</td><td>240</td><td>1.5</td></tr><tr><td>xhdpi</td><td>320</td><td>2</td></tr><tr><td>xxhdpi</td><td>480</td><td>3</td></tr><tr><td>xxxhdpi</td><td>640</td><td>4</td></tr></table>
+	 
+	              <p>The density values in the table above are approximate. The screen
+	 density of an iPhone 5 is 326, so it uses the scale factor from the
+	 "xhdpi" bucket because 326 is closer to 320 than it is to 480.</p>
+	 
+	              <p>Providing textures for every scale factor is optional. Textures from
+	 another scale factor can be automatically scaled to fit the current scale
+	 factor. For instance, since "ldpi" devices with a low screen density
+	 typically aren't manufactured anymore, "mdpi" textures will probably be
+	 "good enough" for these legacy devices, if your app encounters one. The
+	 larger textures will be automatically scaled down, and the app will look
+	 the same as it would if you were using lower resolution textures.</p>
+	 
+	              <p>Special behavior has been implemented for iPads to give them scale
+	 factors of <code>1</code> and <code>2</code>, just like native apps.
+	 Using Android's rules for DPI buckets, non-Retina iPads would have been
+	 "ldpi" devices (scale factor <code>0.75</code>) and Retina iPads would
+	 have been "hdpi" devices (scale factor <code>1.5</code>. However, because
+	 it makes more sense to make Starling use the same scale factor as native
+	 apps on iPad, this class makes a special exception just for them.</p>
+	 
+	              <p>The following example demonstrates how to use
+	 <code>ScreenDensityScaleFactorManager</code>:</p>
+	 
+	              <div class="listing" version="3.0"><pre>
+     this._starling = new Starling( RootClass, this.stage, null, null, Context3DRenderMode.AUTO, Context3DProfile.BASELINE );
+     this._scaler = new ScreenDensityScaleFactorManager(this._starling);</pre></div>
+	 
+	              <p>When using this class, you should not attempt to manually resize the
+	 Starling view port or stage manually. This class manages their dimensions
+	 automatically on its own.</p>
+	           <p></p><br/><hr></div><a name="methodSummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Methods </div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableMethod"><tr><th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#ScreenDensityScaleFactorManager()" class="signatureLink">ScreenDensityScaleFactorManager</a>(starling:Starling)</div><div class="summaryTableDescription">
+		 Constructor.</div></td><td class="summaryTableOwnerCol">ScreenDensityScaleFactorManager</td></tr></table></div><script language="javascript" type="text/javascript"><!--
+										showHideInherited();
+										--></script><div class="MainContent"><a name="constructorDetail"></a><div class="detailSectionHeader">Constructor Detail</div><a name="ScreenDensityScaleFactorManager()"></a><a name="ScreenDensityScaleFactorManager(starling.core.Starling)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">ScreenDensityScaleFactorManager</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">Constructor</td></tr></table><div class="detailBody"><code>public function ScreenDensityScaleFactorManager(starling:Starling)</code><p></p><p>
+		 Constructor.
+		 </p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">starling</span>:Starling</code></td></tr></table></div><br/><br/><hr><br/><p></p><center class="copyright"><footer><a href="http://feathersui.com/" target="_top">Feathers</a> | <a href="https://github.com/BowlerHatLLC/feathers" target="_top">Github Project</a> | <a href="http://forum.starling-framework.org/forum/feathers" target="_top">Support Forum</a></footer><br/>Tue Aug 11 2015, 10:59 AM -07:00  </center></div></body></html><!--Feathers | Github Project | Support Forum<br/>Tue Aug 11 2015, 10:59 AM -07:00  -->

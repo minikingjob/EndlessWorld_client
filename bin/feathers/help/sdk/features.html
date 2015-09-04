@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Feathers SDK Features - Feathers SDK and MXML Help - Feathers 2.2.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+	</style>
+	<link rel="stylesheet" href="../css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="../index.html">Feathers 2.2.0 Help</a> / <a href="index.html">Feathers SDK and MXML Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="features-of-the-feathers-sdk">Features of the Feathers SDK</h1>
+<p>The <a href="http://feathersui.com/sdk/">Feathers SDK</a> offers everything you need to build <a href="http://feathersui.com/">Feathers</a> applications using MXML and ActionScript 3, including compilers and user interface components, in one open source package.</p>
+<h2 id="overview">Overview</h2>
+<ul>
+<li><p>Use <a href="mxml.html">MXML</a> instead of ActionScript to create user interfaces and layouts faster with Feathers components.</p></li>
+<li><p>Compatible with popular IDEs, including <a href="flash-builder.html">Flash Builder</a> and <a href="intellij-idea.html">IntelliJ IDEA</a>.</p></li>
+<li><p>Built on top of <a href="http://feathersui.com/">Feathers</a>, <a href="http://gamua.com/starling">Starling Framework</a>, and a fork of the <a href="http://flex.apache.org/">Apache Flex SDK</a>. Targets Adobe AIR and Flash Player.</p></li>
+<li><p>Open source under the terms of the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache license, version 2.0</a>.</p></li>
+<li><p>Funded by the community. Special thanks to <a href="http://yeticgi.com/">YETi CGI</a>.</p></li>
+</ul>
+<h2 id="mxml">MXML</h2>
+<ul>
+<li><p>Add children and describe layouts with intuitive XML nesting.</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;f:LayoutGroup&gt;</span>
+    <span class="kw">&lt;f:layout&gt;</span>
+        <span class="kw">&lt;f:HorizontalLayout/&gt;</span>
+    <span class="kw">&lt;/f:layout&gt;</span>
+
+    <span class="kw">&lt;f:Slider/&gt;</span>
+    <span class="kw">&lt;f:Label/&gt;</span>
+<span class="kw">&lt;/f:LayoutGroup&gt;</span></code></pre></li>
+<li><p>Set properties and listen to events as XML attributes.</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;f:Slider</span><span class="ot"> minimum=</span><span class="st">&quot;0&quot;</span><span class="ot"> maximum=</span><span class="st">&quot;100&quot;</span><span class="ot"> change=</span><span class="st">&quot;slider_changeHandler(event)&quot;</span><span class="kw">/&gt;</span></code></pre></li>
+<li><p>Reference MXML components in embedded ActionScript by giving them an ID.</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;f:Slider</span><span class="ot"> id=</span><span class="st">&quot;slider&quot;</span><span class="ot"> change=</span><span class="st">&quot;slider_changeHandler(event)&quot;</span><span class="kw">/&gt;</span>
+<span class="kw">&lt;fx:Script&gt;</span><span class="bn">&lt;![CDATA[</span>
+
+    private function slider_changeHandler(event:Event):void
+    {
+        trace(&quot;slider value changed! &quot; + this.slider.value);
+    }
+
+<span class="bn">]]&gt;</span><span class="kw">&lt;/fx:Script&gt;</span></code></pre></li>
+<li><p>Bind components to properties with simple curly brace syntax.</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;f:Slider</span><span class="ot"> id=</span><span class="st">&quot;slider&quot;</span><span class="kw">/&gt;</span>
+<span class="kw">&lt;f:Label</span><span class="ot"> text=</span><span class="st">&quot;{slider.value}&quot;</span><span class="kw">/&gt;</span></code></pre></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="../index.html">Feathers 2.2.0 Help</a> / <a href="index.html">Feathers SDK and MXML Help</a></nav>
+<p class="copyright">Copyright 2012-2015 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

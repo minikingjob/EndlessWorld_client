@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<playlist>
+	<list name="黙认">
+		<mp3 name="lalalove"
+			src="http://xzy.free.fr/music/lalalove.mp3"
+			lrc="" />
+		<mp3 name="女人花"
+			src="http://bgl.sz.net.cn/bgl/2006-10/25/../../../images/2006-10/25/5810032509343591372632.mp3"
+			lrc="lrc/女人花.lrc" />
+		<mp3 name="不是因为寂寞才想你" src="http://cache.mars.sina.com.cn/nd/bbsdigi/year_09/month_05/b/1/20090530_0a7177c8b23246ddf9d58k4yD8Y68yZ6.mp3?vt3http://chinaaa.org.cn/zt/001.mp3" 
+			 lrc="lrc/不是因为寂寞才想你.lrc"/>
+		<mp3 name="蓝色的眼泪"
+			src="http://www.12346.gov.cn/Video/gequ/lanyanlei.mp3"
+			lrc="http://www.lrc123.com/download/lrc/15180-583.aspx" />
+		<mp3 name="一千零一个愿望"  src="E:\kugoo\4 in love - 一千零一个愿望.mp3" lrc = "C:\Program Files\TTPlayer\Lyrics\4 in love - 一千零一个愿望.lrc" />
+	</list>
+</playlist>

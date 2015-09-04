@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<data>
+	<skins default="I-DIDI">
+		<skin src="skins/I-DIDI.skn" name="I-DIDI" />
+		<skin src="skins/AIPOTU_SUN_V3.skn" name="AIPOTU_SUN_V3" />
+		<skin src="skins/长江七号.skn" name="长江七号" />
+		<skin src="skins/WMP10.skn" name="WMP10" />
+		<skin src="skins/ArcticAMP.skn" name="ArcticAMP" />
+	</skins>
+</data>

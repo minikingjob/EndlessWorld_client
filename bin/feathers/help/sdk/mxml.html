@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>The complete guide to MXML in the Feathers SDK - Feathers SDK and MXML Help - Feathers 2.2.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+	</style>
+	<link rel="stylesheet" href="../css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="../index.html">Feathers 2.2.0 Help</a> / <a href="index.html">Feathers SDK and MXML Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="the-complete-guide-to-mxml-in-the-feathers-sdk">The complete guide to MXML in the Feathers SDK</h1>
+<p>The <a href="http://feathersui.com/sdk/">Feathers SDK</a> supports using MXML to declaratively layout user interfaces at compile time. MXML provides a number of features to reduce boilerplate ActionScript code and make user interface code more readable.</p>
+<h2 id="add-children-to-containers">Add children to containers</h2>
+<p>With only a quick glance at MXML code, we can easily recognize the relationship between a component and its parent container. Adding a child to a container is as simple as nesting an XML element inside another.</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;f:LayoutGroup&gt;</span>
+    <span class="kw">&lt;f:Slider/&gt;</span>
+<span class="kw">&lt;/f:LayoutGroup&gt;</span></code></pre>
+<h2 id="set-properties-on-components">Set properties on components</h2>
+<p>A component's properties may be set in one of two ways. First, we can set properties using XML attributes:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;f:Slider</span><span class="ot"> minimum=</span><span class="st">&quot;0&quot;</span><span class="ot"> maximum=</span><span class="st">&quot;100&quot;</span><span class="ot"> value=</span><span class="st">&quot;10&quot;</span><span class="kw">/&gt;</span></code></pre>
+<p>Simple types like <code>Number</code>, <code>int</code>, <code>uint</code>, <code>String</code>, and <code>Boolean</code> can be set this way.</p>
+<p>Alternatively, we can pass more complex values to a property by referencing it using a child XML element:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;f:LayoutGroup&gt;</span>
+    <span class="kw">&lt;f:layout&gt;</span>
+        <span class="kw">&lt;f:HorizontalLayout</span><span class="ot"> padding=</span><span class="st">&quot;10&quot;</span><span class="kw">/&gt;</span>
+    <span class="kw">&lt;/f:layout&gt;</span>
+
+    <span class="kw">&lt;f:Slider</span><span class="ot"> minimum=</span><span class="st">&quot;0&quot;</span><span class="ot"> maximum=</span><span class="st">&quot;100&quot;</span><span class="ot"> value=</span><span class="st">&quot;10&quot;</span><span class="kw">/&gt;</span>
+<span class="kw">&lt;/f:LayoutGroup&gt;</span></code></pre>
+<p>Here, we create a new instance of <code>HorizontalLayout</code>, set one of its properties, and then we pass it to the <code>layout</code> property.</p>
+<h2 id="add-event-listeners">Add event listeners</h2>
+<p>Similar to setting properties, we can listen for events by referencing the event type as an XML attribute:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;f:Slider</span><span class="ot"> minimum=</span><span class="st">&quot;0&quot;</span><span class="ot"> maximum=</span><span class="st">&quot;100&quot;</span><span class="ot"> value=</span><span class="st">&quot;10&quot;</span>
+<span class="ot">    change=</span><span class="st">&quot;slider_changeHandler(event)&quot;</span><span class="kw">/&gt;</span></code></pre>
+<p>We've added an event listener for <code>Event.CHANGE</code> to the <code>Slider</code>. In the next section, we'll learn how to write the ActionScript code for this event listener.</p>
+<h2 id="include-actionscript-code-inside-an-mxml-component">Include ActionScript code inside an MXML component</h2>
+<p>In the previous example, we listened for an event. Let's create the event listener function using ActionScript. We can add an <code>&lt;fx:Script&gt;</code> block to our MXML component to include ActionScript code:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;fx:Script&gt;</span><span class="bn">&lt;![CDATA[</span>
+
+    private function button_triggeredHandler(event:Event):void
+    {
+        trace( &quot;slider value changed!&quot; );
+    }
+
+<span class="bn">]]&gt;</span><span class="kw">&lt;/fx:Script&gt;</span></code></pre>
+<h2 id="reference-mxml-components-in-actionscript">Reference MXML components in ActionScript</h2>
+<p>If we want to access the <code>value</code> property of the <code>Slider</code> in our event listener, we can give the <code>Slider</code> an id.</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;f:Slider</span><span class="ot"> id=</span><span class="st">&quot;slider&quot;</span>
+<span class="ot">    minimum=</span><span class="st">&quot;0&quot;</span><span class="ot"> maximum=</span><span class="st">&quot;100&quot;</span><span class="ot"> value=</span><span class="st">&quot;10&quot;</span>
+<span class="ot">    change=</span><span class="st">&quot;slider_changeHandler(event)&quot;</span><span class="kw">/&gt;</span></code></pre>
+<p>Now, we can reference the <code>Slider</code> that we created in MXML like a member variable on an ActionScript class:</p>
+<pre class="code"><code>private function button_triggeredHandler(event:Event):void
+{
+    trace( &quot;slider value changed! &quot; + this.slider.value );
+}</code></pre>
+<h2 id="bind-data-to-properties">Bind data to properties</h2>
+<p>Data binding can save us time by skipping the boilerplate code for setting up event listeners and setting properties.</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;f:LayoutGroup&gt;</span>
+    <span class="kw">&lt;f:layout&gt;</span>
+        <span class="kw">&lt;f:HorizontalLayout/&gt;</span>
+    <span class="kw">&lt;/f:layout&gt;</span>
+
+    <span class="kw">&lt;f:Slider</span><span class="ot"> id=</span><span class="st">&quot;slider&quot;</span><span class="ot"> minimum=</span><span class="st">&quot;0&quot;</span><span class="ot"> maximum=</span><span class="st">&quot;100&quot;</span><span class="ot"> value=</span><span class="st">&quot;10&quot;</span><span class="kw">/&gt;</span>
+    <span class="kw">&lt;f:Label</span><span class="ot"> text=</span><span class="st">&quot;{slider.value}&quot;</span><span class="kw">/&gt;</span>
+<span class="kw">&lt;/f:LayoutGroup&gt;</span></code></pre>
+<p>Now, when the slider's <code>value</code> property changes, we display the value in a label.</p>
+<h2 id="create-inline-sub-components-with-fxcomponent">Create inline sub-components with <code>&lt;fx:Component&gt;</code></h2>
+<p>When sub-components require a factory, we can define it in the MXML using <code>&lt;fx:Component&gt;</code> instead of writing the factory as a function in ActionScript code:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;f:List&gt;</span>
+    <span class="kw">&lt;f:itemRendererFactory&gt;</span>
+        <span class="kw">&lt;fx:Component&gt;</span>
+            <span class="kw">&lt;f:DefaultListItemRenderer</span><span class="ot"> labelField=</span><span class="st">&quot;text&quot;</span><span class="kw">/&gt;</span>
+        <span class="kw">&lt;/fx:Component&gt;</span>
+    <span class="kw">&lt;/f:itemRendererFactory&gt;</span>
+    <span class="kw">&lt;f:dataProvider&gt;</span>
+        <span class="kw">&lt;f:ListCollection&gt;</span>
+            <span class="kw">&lt;fx:Object</span><span class="ot"> text=</span><span class="st">&quot;Milk&quot;</span><span class="kw">/&gt;</span>
+            <span class="kw">&lt;fx:Object</span><span class="ot"> text=</span><span class="st">&quot;Eggs&quot;</span><span class="kw">/&gt;</span>
+            <span class="kw">&lt;fx:Object</span><span class="ot"> text=</span><span class="st">&quot;Flour&quot;</span><span class="kw">/&gt;</span>
+            <span class="kw">&lt;fx:Object</span><span class="ot"> text=</span><span class="st">&quot;Sugar&quot;</span><span class="kw">/&gt;</span>
+        <span class="kw">&lt;/f:ListCollection&gt;</span>
+    <span class="kw">&lt;/f:dataProvider&gt;</span>
+<span class="kw">&lt;/f:List&gt;</span></code></pre>
+<p>In the MXML above, we create a <code>DefaultListItemRenderer</code> and set its <code>labelField</code> as an inline component.</p>
+</article>
+<footer>
+<div class="content">
+<nav><a href="../index.html">Feathers 2.2.0 Help</a> / <a href="index.html">Feathers SDK and MXML Help</a></nav>
+<p class="copyright">Copyright 2012-2015 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

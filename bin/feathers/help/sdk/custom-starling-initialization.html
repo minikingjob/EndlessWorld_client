@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Customize the initialization of Starling in a Feathers MXML application - Feathers SDK and MXML Help - Feathers 2.2.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+	</style>
+	<link rel="stylesheet" href="../css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="../index.html">Feathers 2.2.0 Help</a> / <a href="index.html">Feathers SDK and MXML Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="customize-the-initialization-of-starling-in-a-feathers-mxml-application">Customize the initialization of Starling in a Feathers MXML application</h1>
+<p>When you create a new Feathers application in MXML, Starling is initialized automatically by the compiler, behind the scenes. The default settings will work well for most Feathers apps to support common requirements like stage and view port resizing, high DPI displays on desktop, and creating a theme. However, advanced developers may wish to customize some of these settings.</p>
+<p>In your project's application, you can provide your own <code>[Frame]</code> metadata to use a custom class to initialize Starling:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;f:Application</span><span class="ot"> xmlns:fx=</span><span class="st">&quot;http://ns.adobe.com/mxml/2009&quot;</span>
+<span class="ot">    xmlns:f=</span><span class="st">&quot;library://ns.feathersui.com/mxml&quot;</span><span class="kw">&gt;</span>
+
+    <span class="kw">&lt;fx:Metadata&gt;</span>
+        [Frame(factoryClass=&quot;com.example.CustomBootstrap&quot;)]
+    <span class="kw">&lt;/fx:Metadata&gt;</span>
+<span class="kw">&lt;/f:Application&gt;</span></code></pre>
+<p>A very simple startup class might look something like this:</p>
+<pre class="code"><code>package com.example
+{
+    import flash.display.Sprite;
+
+    import starling.core.Starling;
+
+    public class CustomBootstrap extends Sprite
+    {
+        public function CustomBootstrap()
+        {
+            this._starling = new Starling( MyApp, this.stage );
+            this._starling.start();
+        }
+
+        private var _starling:Starling;
+    }
+}</code></pre>
+</article>
+<footer>
+<div class="content">
+<nav><a href="../index.html">Feathers 2.2.0 Help</a> / <a href="index.html">Feathers SDK and MXML Help</a></nav>
+<p class="copyright">Copyright 2012-2015 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>
