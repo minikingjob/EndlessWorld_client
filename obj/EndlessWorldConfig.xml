@@ -45,7 +45,7 @@
     </library-path>
   </compiler>
   <file-specs>
-    <path-element>E:\EndlessWorld\src\Main.as</path-element>
+    <path-element>E:\EndlessWorld\src\ComponentsExplorer.as</path-element>
   </file-specs>
   <default-background-color>#FFFFFF</default-background-color>
   <default-frame-rate>30</default-frame-rate>

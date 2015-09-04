@@ -14,11 +14,11 @@ package
 	 * ...
 	 * @author minichen
 	 */
-	public class Main extends Sprite 
+	public class MainEntry extends Sprite 
 	{
 		private var _starling:Starling;
 		private var facade:MyApplicationFacade = new MyApplicationFacade();
-		public function Main() 
+		public function MainEntry() 
 		{
 			AppManager.stage = stage;
 			facade.startup(this);
