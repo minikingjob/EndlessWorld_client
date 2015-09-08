@@ -1,5 +1,6 @@
 package com.core 
 {
+	import com.core.managers.CookieManager;
 	import com.core.managers.LogManager;
 	import com.core.managers.TimerManager;
 	import com.core.managers.LoaderManager;
@@ -15,6 +16,7 @@ package com.core
 		public static var phpLoader:PhpLoaderManager = new PhpLoaderManager();
 		public static var timer:TimerManager = new TimerManager();
 		public static var log:LogManager = new LogManager();
+		public static var cookie:CookieManager = new CookieManager();
 		
 		public static var stage:Stage;
 		

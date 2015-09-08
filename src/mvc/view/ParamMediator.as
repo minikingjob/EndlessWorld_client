@@ -15,6 +15,7 @@ package mvc.view
 	 */
 	public class ParamMediator extends Mediator 
 	{
+		private var paramCookie:Object;
 		private var paramTest:ParamTest;
 		public function ParamMediator(mediatorName:String=null, viewComponent:Object=null) 
 		{
@@ -28,13 +29,21 @@ package mvc.view
 			paramTest.decodeButton.addEventListener(MouseEvent.CLICK, onClick);
 			
 			paramTest.webView.stage = stage;
+			
+			paramCookie = AppManager.cookie.get("paramCookie");
+			if (paramCookie) {
+				paramTest.typeTextArea.text = paramCookie.lastType;
+				var obj:Object = paramCookie[paramCookie.lastType];
+				paramTest.uidTextArea.text = obj.uid;
+				paramTest.paramTextArea.text = obj.jsonStr;
+			}
 		}
 		
 		private function onClick(e:MouseEvent):void {
 			trace(e.target.name);
 			var name:String = e.target.name;
 			
-			var type:String = paramTest.typeTextArea.text;
+			var type:int = int(paramTest.typeTextArea.text);
 			var jsonStr:String = paramTest.paramTextArea.text;
 			var uid:String = paramTest.uidTextArea.text;
 			var obj:Object = JSON.parse(jsonStr);
@@ -48,6 +57,16 @@ package mvc.view
 					AppManager.phpLoader.phpCall("POST", url, JSON.stringify(obj),
 												new Handler(completeHandler, [type]),
 												new Handler(errorHandler, [type]));
+					paramCookie = AppManager.cookie.get("paramCookie");
+					if (!paramCookie) {
+						paramCookie = { };
+					}
+					paramCookie.lastType = type;
+					paramCookie[type] = { };
+					paramCookie[type].uid = uid;
+					paramCookie[type].jsonStr = jsonStr;
+					AppManager.cookie.put("paramCookie", paramCookie);
+					
 					break;
 				case paramTest.decodeButton.name:
 					//trace(PhpParse(resultBytes));
