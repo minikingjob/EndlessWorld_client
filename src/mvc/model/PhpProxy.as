@@ -17,9 +17,7 @@ package mvc.model
 	 */
 	public class PhpProxy extends Proxy implements IProxy 
 	{
-		//加载php数据
-		
-		
+		//加载php数据		
 		public function PhpProxy(proxyName:String=null, data:Object=null) 
 		{
 			super(proxyName, data);

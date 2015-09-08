@@ -16,7 +16,7 @@
     </define>
     <define append="true">
       <name>CONFIG::timeStamp</name>
-      <value>'2015/9/4'</value>
+      <value>'2015/9/7'</value>
     </define>
     <define append="true">
       <name>CONFIG::air</name>
@@ -45,7 +45,7 @@
     </library-path>
   </compiler>
   <file-specs>
-    <path-element>E:\EndlessWorld\src\ComponentsExplorer.as</path-element>
+    <path-element>E:\EndlessWorld\src\MainEntry.as</path-element>
   </file-specs>
   <default-background-color>#FFFFFF</default-background-color>
   <default-frame-rate>30</default-frame-rate>

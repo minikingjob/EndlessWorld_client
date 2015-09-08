@@ -86,13 +86,14 @@ package com.core.managers
 					}
 					if(_urlRequest.method == "POST"){
 						var urlVariable:URLVariables = new URLVariables();					
-						for each(key in jsonObj) {
-							urlVariable[key] = jsonObj[key];
+						for(key in jsonObj) {
+							urlVariable[key] = JSON.stringify(jsonObj[key]);
+							trace(key, JSON.stringify(jsonObj[key]));
 						}
 						_urlRequest.data = urlVariable;
 					}else {
 						var count:int = 0;
-						for each(key in jsonObj) {
+						for(key in jsonObj) {
 							if(count <= 0)_urlRequest.url += ("?" +key + "=" + jsonObj[key]);
 							else _urlRequest.url += ("&" +key + "=" + jsonObj[key]);
 						}

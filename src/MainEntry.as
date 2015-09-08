@@ -23,10 +23,10 @@ package
 			AppManager.stage = stage;
 			facade.startup(this);
 			
-			Starling.multitouchEnabled = true;
-			_starling = new Starling(DrawsTest, AppManager.stage, null, null, Context3DRenderMode.AUTO, Context3DProfile.BASELINE);
-			this._starling.supportHighResolutions = true;
-			_starling.start();
+			//Starling.multitouchEnabled = true;
+			//_starling = new Starling(DrawsTest, AppManager.stage, null, null, Context3DRenderMode.AUTO, Context3DProfile.BASELINE);
+			//this._starling.supportHighResolutions = true;
+			//_starling.start();
 		}
 		
 	}
