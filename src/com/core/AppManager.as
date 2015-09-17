@@ -6,12 +6,15 @@ package com.core
 	import com.core.managers.LoaderManager;
 	import com.core.managers.PhpLoaderManager;
 	import flash.display.Stage;
+	import mvc.MyApplicationFacade;
 	/**
 	 * ...
 	 * @author minichen
 	 */
 	public class AppManager 
 	{
+		public static var facade:MyApplicationFacade = new MyApplicationFacade();
+		
 		public static var loader:LoaderManager = new LoaderManager();	
 		public static var phpLoader:PhpLoaderManager = new PhpLoaderManager();
 		public static var timer:TimerManager = new TimerManager();

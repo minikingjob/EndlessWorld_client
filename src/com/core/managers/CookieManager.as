@@ -35,7 +35,7 @@ package com.core.managers
 			{
 				return;
 			}
-			for (var key in obj)
+			for (var key:* in obj)
 			{
 				if (obj[key] == undefined || obj[key].time == undefined || isTimeOut(obj[key].time))
 				{

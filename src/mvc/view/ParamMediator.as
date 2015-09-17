@@ -4,6 +4,7 @@ package mvc.view
 	import com.core.AppManager;
 	import com.core.handlers.Handler;
 	import flash.display.Stage;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.utils.ByteArray;
 	import mvc.view.ui.ParamTest;
@@ -16,6 +17,9 @@ package mvc.view
 	public class ParamMediator extends Mediator 
 	{
 		private var paramCookie:Object;
+		private var paramArr:Array = [];
+		private var selectIndex:int = 0;
+		
 		private var paramTest:ParamTest;
 		public function ParamMediator(mediatorName:String=null, viewComponent:Object=null) 
 		{
@@ -30,14 +34,49 @@ package mvc.view
 			
 			paramTest.webView.stage = stage;
 			
+			
+			paramTest.typeCombox.addEventListener(Event.CHANGE, selectHandler);
+			paramTest.typeCombox.rowCount = 10;
+			//typeCombox
+			comboxRefresh();
+		}
+		
+		private function comboxRefresh():void {
 			paramCookie = AppManager.cookie.get("paramCookie");
 			if (paramCookie) {
-				paramTest.typeTextArea.text = paramCookie.lastType;
-				var obj:Object = paramCookie[paramCookie.lastType];
-				paramTest.uidTextArea.text = obj.uid;
-				paramTest.paramTextArea.text = obj.jsonStr;
-			}
+				var count:int = 0;
+				var id:String;
+				var pattern:RegExp = /^[0-9]*$/i;
+				paramArr = [];
+				paramTest.typeCombox.removeAll();
+				for (id in paramCookie)
+				{
+					if (pattern.test(id)) {
+						paramArr[count] = paramCookie[id];
+						
+						paramArr[count]["label"] = id;
+						paramTest.typeCombox.addItem(paramArr[count]);
+						
+						if (id == paramCookie.lastType) selectIndex = count;
+						
+						count++;
+					}
+				}
+				
+			}	
 		}
+		
+		private function selectHandler(e:Event = null):void {
+			trace(paramTest.typeCombox.selectedIndex);
+			var obj:Object = paramArr[paramTest.typeCombox.selectedIndex];
+			
+			trace(JSON.stringify(obj));
+			
+			paramTest.typeTextArea.text = obj.label;
+			paramTest.uidTextArea.text = obj.uid;
+			paramTest.paramTextArea.text = obj.jsonStr;
+		}
+		
 		
 		private function onClick(e:MouseEvent):void {
 			trace(e.target.name);
@@ -67,6 +106,7 @@ package mvc.view
 					paramCookie[type].jsonStr = jsonStr;
 					AppManager.cookie.put("paramCookie", paramCookie);
 					
+					comboxRefresh();
 					break;
 				case paramTest.decodeButton.name:
 					//trace(PhpParse(resultBytes));

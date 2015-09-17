@@ -16,7 +16,7 @@ package mvc.cotroller.shell
 	{
 		override public function execute(e:INotification):void {
 			trace("ViewPrepCommand -execute");
-            facade.registerMediator(new ParamMediator());
+            facade.registerMediator(new StageMediator());
 
 		}
 	}

@@ -86,9 +86,17 @@ package com.core.managers
 					}
 					if(_urlRequest.method == "POST"){
 						var urlVariable:URLVariables = new URLVariables();					
-						for(key in jsonObj) {
-							urlVariable[key] = JSON.stringify(jsonObj[key]);
-							trace(key, JSON.stringify(jsonObj[key]));
+						for (key in jsonObj) {
+							trace(typeof(jsonObj[key]));
+							if (typeof(jsonObj[key]) != "string") {
+								urlVariable[key] = JSON.stringify(jsonObj[key]);
+								trace("参数:", key, JSON.stringify(jsonObj[key]));
+							}
+							else {
+								urlVariable[key] = jsonObj[key];
+								trace("参数:", key, jsonObj[key]);
+							}
+							
 						}
 						_urlRequest.data = urlVariable;
 					}else {
